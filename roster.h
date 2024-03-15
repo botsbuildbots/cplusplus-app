@@ -8,12 +8,12 @@ using namespace std;
 class Roster {
   private:
     // declares a pointer that will be used to build array of student objects
-    Student *classRosterArray;
+    // "static const int" is just to avoid magic number declaration, could use count parameters later
+    static const int NUM_STUDENTS = 5;
+    Student *classRosterArray[NUM_STUDENTS];
   public:
-    // constructor takes in the number of students to be added to the array, should create array for classRosterArray with that count
-    // classRosterArray = new Student[studentCount];
-    // alternatively just delcare classRosterArray with five students and then have add() create new Student and place at each index then ++index
-    Roster(int studentCount);
+    // Just declare classRosterArray with five students, have add() create new Student and place at each index, then ++index
+    Roster();
     ~Roster();
     void Add(string studentID, string firstName, string lastName, string emailAddress, int age, 
       int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram);
