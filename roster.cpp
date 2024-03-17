@@ -3,12 +3,21 @@
 #include <iostream>
 using namespace std;
 
-Roster::Roster(string studentData) {
-  // constructor should parse studentData to populate array on creation
+Roster::Roster() {
+  // constructor should call Parse() on studentData to populate array during creation
+  // then Parse() will call Add() to add instances to array
+  // this leaves Add() open for independent calls after Roster is populated initially
+  Parse(studentData[5]);
  }
+
 // default destructor
-Roster::~Roster() { 
+Roster::~Roster() {
+  // since Roster is created using "new" the memory needs to be freed later 
   delete[] classRosterArray;
+}
+
+void Roster::Parse(string studentData) {
+  // Parse() should work through studentData and call Add() for each entry to populate classRosterArray
 }
 
 void Roster::Add(string studentID, string firstName, string lastName, string emailAddress, int age, 
@@ -22,21 +31,26 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
     // Add() should only create a single instance at a specific classRosterArray[targetIndex] location
     // classRosterArray[targetIndex] determination needs to happen elsewhere
     // could Add() could check to see if classRosterArray[targetIndex] is occupied first?
-  }
+}
+
 void Roster::Remove(string studentID) { 
   // this should for-loop Student objects for matching member value, then remove object
   // check and return an error if the specified object is not found
   // leave slot empty to create new instance later
 }
+
 void Roster::PrintAll() { 
   // for-loop through Student instances and print all available (create message to print for empty indexes)
 }
+
 void Roster::PrintAverageDaysInCourse(string studentID) {
-  // same as Remove(), check for matching Student object and average out 
- }
+  // same as Remove(), check for matching Student object and average out daysInCourse values
+}
+
 void Roster::PrintInvalidEmails() {
   // check Student instances for invalid emails, print results
- }
+}
+
 void Roster::PrintByDegreeProgram(DegreeProgram degreeProgram) { 
   // check Student instances for matching DegreeProgram, print results
 }
