@@ -7,12 +7,12 @@ Roster::Roster() {
   // constructor should call Parse() on studentData to populate array during creation
   // then Parse() will call Add() to add instances to array
   // this leaves Add() open for independent calls after Roster is populated initially
-  Parse(studentData[5]);
+  Parse(studentData[NUM_STUDENTS]);
  }
 
 // default destructor
 Roster::~Roster() {
-  // since Roster is created using "new" the memory needs to be freed later 
+  // remember to clean up classRosterArray memory once program completes 
   delete[] classRosterArray;
 }
 
