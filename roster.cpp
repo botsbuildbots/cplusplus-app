@@ -12,16 +12,16 @@ Roster::Roster() {
 
 // default destructor
 Roster::~Roster() {
-  // remember to clean up classRosterArray memory once program completes 
+  // remember to clean up classRosterArray memory before program completes 
   delete[] classRosterArray;
 }
 
 void Roster::Parse(string studentData) {
-  // Parse() should work through studentData and call Add() for each entry to populate classRosterArray
+  // Parse() should work through studentData and call Add() for each line to populate classRosterArray
 }
 
-void Roster::Add(string studentID, string firstName, string lastName, string emailAddress, int age, 
-  int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram) {
+void Roster::Add(string studentID, string firstName, string lastName, string emailAddress, int age,
+    int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram) {
     // Student constructor needs the memory address of an int array, so create one here for daysInCourse parameters
     // numDaysInCourse should be passed to new Student(parameters)
     int *numDaysInCourse = new int[3];
@@ -29,8 +29,11 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
     numDaysInCourse[1] = daysInCourse2;
     numDaysInCourse[2] = daysInCourse3;
     // Add() should only create a single instance at a specific classRosterArray[targetIndex] location
-    // classRosterArray[targetIndex] determination needs to happen elsewhere
-    // could Add() could check to see if classRosterArray[targetIndex] is occupied first?
+    this->classRosterArray[this->targetIndex] = new Student(studentID, firstName, lastName, emailAddress, age, numDaysInCourse, degreeProgram);
+    // classRosterArray[targetIndex] determination needs to be set in main()
+    // could Add() check to see if classRosterArray[targetIndex] is occupied first?
+    // since numDaysInCourse is dynamically allocated it needs to be deleted later
+    delete[] numDaysInCourse;
 }
 
 void Roster::Remove(string studentID) { 
