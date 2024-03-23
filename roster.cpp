@@ -17,7 +17,9 @@ Roster::~Roster() {
 }
 
 void Roster::Parse(string studentData) {
-  // Parse() should work through studentData and call Add() for each line to populate classRosterArray
+  // Parse() should work through a single index of studentData[] and call Add() for that line to populate classRosterArray
+  // Set ints for left bound and right bound, use find() to target the commas, then use substr()
+  // Store substr() results into temp variables, then push those to Add()
 }
 
 void Roster::Add(string studentID, string firstName, string lastName, string emailAddress, int age,
@@ -30,7 +32,7 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
     numDaysInCourse[2] = daysInCourse3;
     // Add() should only create a single instance at a specific classRosterArray[targetIndex] location
     this->classRosterArray[this->targetIndex] = new Student(studentID, firstName, lastName, emailAddress, age, numDaysInCourse, degreeProgram);
-    // classRosterArray[targetIndex] determination needs to be set in main()
+    // classRosterArray[targetIndex] determination needs to be set in main() for each consecutive call of Add()
     // could Add() check to see if classRosterArray[targetIndex] is occupied first?
     // since numDaysInCourse is dynamically allocated it needs to be deleted later
     delete[] numDaysInCourse;
