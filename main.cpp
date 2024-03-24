@@ -13,6 +13,6 @@ int main() {
 	cout << "WGU Student ID: 011687882" << endl;
 	cout << "WGU Student Name: Michael Fowler" << endl;
 
-	// this type of declaration should only keep classRoster alive for the length of the program, right?
+	// declares instance of Roster class to generate 
 	Roster classRoster;
 }
