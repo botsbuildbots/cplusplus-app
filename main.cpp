@@ -15,4 +15,6 @@ int main() {
 
 	// declares instance of Roster class to generate 
 	Roster classRoster;
+	// waits for user input before continuing, use this to halt program for debug
+	system("pause");
 }

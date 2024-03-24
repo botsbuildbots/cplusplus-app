@@ -13,16 +13,17 @@ Roster::Roster() {
  }
 
 Roster::~Roster() {
-  // remember to clean up classRosterArray memory before program completes 
-  delete[] classRosterArray;
+  // remember to clean up classRosterArray memory before program completes
+  // this is only necessary if classRosterArray is dynamically allocated, as of right now it is not 
+  // delete[] classRosterArray;
 }
 
 void Roster::Parse(string studentData) {
   // Parse() should work through a single index of studentData[] and call Add() for that line to populate classRosterArray
   // Set ints for left bound and right bound, use find() to target the commas, then use substr() to extract the difference
   // Store substr() results into temp local variables, then push those to Add()
-    int left = 0;
-    int right = 0;
+    size_t left = 0;
+    size_t right = 0;
     right = studentData.find(",");
     string studentID = studentData.substr(0, right);
     left = right + 1;
@@ -54,16 +55,14 @@ void Roster::Parse(string studentData) {
     right = studentData.find(",", left);
     string programHolder = studentData.substr(left, right - left);
     DegreeProgram degreeProgram;
-    switch (programHolder) {
-        case "SECURITY":
-            degreeProgram = SECURITY;
-            break;
-        case "NETWORK":
-            degreeProgram = NETWORK;
-            break;
-        case "SOFTWARE":
-            degreeProgram = SOFTWARE;
-            break;
+    if (programHolder == "SECURITY") {
+        degreeProgram = SECURITY;
+    }
+    else if (programHolder == "NETWORK") {
+        degreeProgram = NETWORK;
+    }
+    else {
+        degreeProgram = SOFTWARE;
     }
 
     Add(studentID, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse2, daysInCourse3, degreeProgram);
@@ -87,7 +86,7 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
 void Roster::Remove(string studentID) { 
   // this should for-loop Student objects for matching member value, then remove object
   // check and return an error if the specified object is not found
-  // leave slot empty to create new instance later
+  // leave slot empty to create new instance later or move all items forward one index
 }
 
 void Roster::PrintAll() { 
@@ -114,11 +113,14 @@ void Roster::PrintAverageDaysInCourse(string studentID) {
 void Roster::PrintInvalidEmails() {
     // loop through classRosterArray, store the emailAddress to temp local variable
     // run tests on that temp local string, if email address is invalid print message to console
+    // valid email addresses must have '@' and '.' characters, must not have ' '
+    // find() returns -1 (or npos) if specific character is not found
     string testString;
     for (int i = 0; i < NUM_STUDENTS; ++i) {
         testString = classRosterArray[i]->GetEmail();
-        if ( /*some string test mechanism*/ ) {
-            /*some printed text to console*/
+        if (testString.find("@") == -1 || testString.find(".") == -1 || testString.find(" ") != -1) {
+            cout << classRosterArray[i]->GetStudentID() << " does not have a valid email address on file." << endl;
+            cout << testString << " is not a valid email address." << endl;
         }
     }
 }
