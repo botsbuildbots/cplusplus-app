@@ -98,24 +98,38 @@ void Roster::PrintAll() {
 }
 
 void Roster::PrintAverageDaysInCourse(string studentID) {
-    int targetIndex;
     int *targetArray;
     int average = 0;
+    // loop through classRosterArray to find Student instance with matching studentID value
+    // if matching value is found, grab pointer to daysInCourse array for that student instance
     for (int i = 0; i < NUM_STUDENTS; ++i) {
         if (classRosterArray[i]->GetStudentID() == studentID) {
-            targetIndex = i;
+            targetArray = classRosterArray[i]->GetDaysInCourse();
         }
     }
-    // GetDaysInCourse() returns pointer to daysInCourse array for the specified student
-    targetArray = classRosterArray[targetIndex]->GetDaysInCourse();
     average = (targetArray[0] + targetArray[1] + targetArray[2]) / 3;
     cout << average << endl;
 }
 
 void Roster::PrintInvalidEmails() {
-  // check Student instances for invalid emails, print results
+    // loop through classRosterArray, store the emailAddress to temp local variable
+    // run tests on that temp local string, if email address is invalid print message to console
+    string testString;
+    for (int i = 0; i < NUM_STUDENTS; ++i) {
+        testString = classRosterArray[i]->GetEmail();
+        if ( /*some string test mechanism*/ ) {
+            /*some printed text to console*/
+        }
+    }
 }
 
-void Roster::PrintByDegreeProgram(DegreeProgram degreeProgram) { 
-  // check Student instances for matching DegreeProgram, print results
+void Roster::PrintByDegreeProgram(DegreeProgram degreeProgram) {
+    // loops through classRosterArray, if degreeProgram value matches parameter call Print() on Student instance
+    DegreeProgram compareProgram;
+    for (int i = 0; i < NUM_STUDENTS; ++i) {
+        compareProgram = classRosterArray[i]->GetDegreeProgram();
+        if (compareProgram == degreeProgram) {
+            classRosterArray[i]->Print();
+        }
+    }
 }
