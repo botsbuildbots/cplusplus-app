@@ -7,7 +7,7 @@ Roster::Roster() {
   // constructor should call Parse() on studentData to populate array during creation
   // then Parse() will call Add() to add instances to array
   // this leaves Add() open for independent calls after Roster is populated initially
-  for (i = 0; i < NUM_STUDENTS; i++) {
+  for (int i = 0; i < NUM_STUDENTS; ++i) {
         Parse(studentData[i]);
   }
  }
@@ -91,11 +91,25 @@ void Roster::Remove(string studentID) {
 }
 
 void Roster::PrintAll() { 
-  // for-loop through Student instances and print all available (create message to print for empty indexes)
+  // for-loop through Student instances and print all available
+    for (int i = 0; i < NUM_STUDENTS; ++i) {
+        classRosterArray[i]->Print();
+    }
 }
 
 void Roster::PrintAverageDaysInCourse(string studentID) {
-  // same as Remove(), check for matching Student object and average out daysInCourse values
+    int targetIndex;
+    int *targetArray;
+    int average = 0;
+    for (int i = 0; i < NUM_STUDENTS; ++i) {
+        if (classRosterArray[i]->GetStudentID() == studentID) {
+            targetIndex = i;
+        }
+    }
+    // GetDaysInCourse() returns pointer to daysInCourse array for the specified student
+    targetArray = classRosterArray[targetIndex]->GetDaysInCourse();
+    average = (targetArray[0] + targetArray[1] + targetArray[2]) / 3;
+    cout << average << endl;
 }
 
 void Roster::PrintInvalidEmails() {
