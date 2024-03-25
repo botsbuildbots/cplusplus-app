@@ -11,7 +11,7 @@ int main() {
 	cout << "Scripting and Programming - Applications — C867" << endl;
 	cout << "Written in C++ using Visual Studio Code" << endl;
 	cout << "WGU Student ID: 011687882" << endl;
-	cout << "WGU Student Name: Michael Fowler" << endl;
+	cout << "WGU Student Name: Michael Fowler" << endl << endl << endl;
 
 	// declares instance of Roster class to generate 
 	Roster classRoster;
