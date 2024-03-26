@@ -2,9 +2,7 @@
 #include <iostream>
 using namespace std;
 
-//default constructor
-Student::Student() { }
-
+// no need for default constructor definition here
 // constructor with parameters, assigns instance member variables with the values passed in arguments
 Student::Student(string ID, string first, string last, string email, int age, int* days, DegreeProgram program) {
   this->studentID = ID;

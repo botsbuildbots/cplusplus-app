@@ -91,9 +91,9 @@ void Roster::Remove(string studentID) {
 
 void Roster::PrintAll() { 
   // for-loop through Student instances and print all available
-    for (int i = 0; i < NUM_STUDENTS; ++i) {
+  for (int i = 0; i < NUM_STUDENTS; ++i) {
         classRosterArray[i]->Print();
-    }
+  }
 }
 
 void Roster::PrintAverageDaysInCourse(string studentID) {

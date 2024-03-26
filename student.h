@@ -15,8 +15,6 @@ class Student {
     int daysInCourse[3];
     DegreeProgram degreeProgram;
   public:
-    // default constructor
-    Student();
     // constructor with parameters
     Student(string ID, string first, string last, string email, int age, int* days, DegreeProgram program);
     // destructor
