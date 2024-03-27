@@ -76,7 +76,7 @@ void Student::Print() {
   // A1 [tab] First Name: John [tab] Last Name: Smith [tab] Age: 20 [tab]daysInCourse: {35, 40, 55} Degree Program: Security
   // this->GetDaysInCourse()[index] should be the same as this.daysInCourse[index], hopefully
   cout << this->GetStudentID() << "\t First Name: " << this->GetFirstName() << "\t Last Name: "                  << 
-          this->GetLastName() << "\t Age: " << this->GetAge() << "\t daysInCourse: {"                            << 
+          this->GetLastName() << "\t Age: " << this->GetAge() << "\t daysInCourse: { "                            << 
           this->GetDaysInCourse()[0] << ", " << this->GetDaysInCourse()[1] << ", " << this->GetDaysInCourse()[2] <<
-          "} Degree Program: " << EnumDeterminate[this->GetDegreeProgram()]                                      << endl;
+          " } Degree Program: " << EnumDeterminate[this->GetDegreeProgram()]                                      << endl;
 }

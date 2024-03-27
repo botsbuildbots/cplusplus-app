@@ -76,9 +76,9 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
     numDaysInCourse[0] = daysInCourse1;
     numDaysInCourse[1] = daysInCourse2;
     numDaysInCourse[2] = daysInCourse3;
-    // Add() should only create a single instance at a specific classRosterArray[targetIndex] location
+    // Add() creates a single student object at targetIndex, then targetIndex increases by one for the next iteration
     classRosterArray[targetIndex] = new Student(studentID, firstName, lastName, emailAddress, age, numDaysInCourse, degreeProgram);
-    // classRosterArray[targetIndex] determination needs to be set in main() for each consecutive call of Add()
+    ++targetIndex;
     // since numDaysInCourse is dynamically allocated it needs to be deleted later
     delete[] numDaysInCourse;
 }
@@ -107,7 +107,7 @@ void Roster::PrintAverageDaysInCourse(string studentID) {
         }
     }
     average = (targetArray[0] + targetArray[1] + targetArray[2]) / 3;
-    cout << average << endl;
+    cout << "The average of the days left in each course for Student " << studentID << " is: " << average << endl;
 }
 
 void Roster::PrintInvalidEmails() {
@@ -119,8 +119,8 @@ void Roster::PrintInvalidEmails() {
     for (int i = 0; i < NUM_STUDENTS; ++i) {
         testString = classRosterArray[i]->GetEmail();
         if (testString.find("@") == -1 || testString.find(".") == -1 || testString.find(" ") != -1) {
-            cout << classRosterArray[i]->GetStudentID() << " does not have a valid email address on file." << endl;
-            cout << testString << " is not a valid email address." << endl;
+            cout << "Student " << classRosterArray[i]->GetStudentID() << " does not have a valid email address on file." << endl;
+            cout << testString << " is not a valid email address." << endl << endl;
         }
     }
 }

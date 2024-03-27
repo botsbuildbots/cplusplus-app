@@ -13,8 +13,9 @@ int main() {
 	cout << "WGU Student ID: 011687882" << endl;
 	cout << "WGU Student Name: Michael Fowler" << endl << endl << endl;
 
-	// declares instance of Roster class to generate 
+	// declares instance of Roster class to generate Student objects
 	Roster classRoster;
+	classRoster.PrintAverageDaysInCourse("A1");
 	// waits for user input before continuing, use this to halt program for debug
 	system("pause");
 }
