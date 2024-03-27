@@ -7,9 +7,10 @@ using namespace std;
 
 class Roster {
   private:
-    // "static const int" is used to avoid magic number declaration, could use count parameter for variable size later on
+    // "static const int" is used to avoid magic number declaration
     static const int NUM_STUDENTS = 5;
     // store studentData[] here, then have constructor call Parse() to populate initial array
+    // typos are intentional so PrintInvalidEmails() has actual work to do
     const string studentData[NUM_STUDENTS] = {
 		  "A1,John,Smith,John1989@gmail.com,20,30,35,40,SECURITY",
 		  "A2,Suzan,Erickson,Erickson_1990@ gmail.com,19,50,30,40,NETWORK",
@@ -18,8 +19,8 @@ class Roster {
 		  "A5,Michael,Fowler,mfow119@wgu.edu,32,14,14,14,SOFTWARE"
 	  };
     // declares a pointer that will store location of array of student objects
-    Student *classRosterArray[NUM_STUDENTS];
   public:
+    Student* classRosterArray[NUM_STUDENTS];
     int targetIndex = 0;
     Roster();
     ~Roster();

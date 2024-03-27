@@ -84,9 +84,13 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
 }
 
 void Roster::Remove(string studentID) { 
-  // this should for-loop Student objects for matching member value, then remove object
-  // check and return an error if the specified object is not found
-  // leave slot empty to create new instance later or move all items forward one index
+    int indexToRemove = 0;
+    for (int i = 0; i < NUM_STUDENTS; ++i) {
+        if (classRosterArray[i]->GetStudentID() == studentID) {
+            indexToRemove = i;
+        }
+    }
+    // use indexToRemove to specify which object needs to be removed, then shift remaining elements left by one
 }
 
 void Roster::PrintAll() { 

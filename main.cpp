@@ -15,7 +15,17 @@ int main() {
 
 	// declares instance of Roster class to generate Student objects
 	Roster classRoster;
-	classRoster.PrintAverageDaysInCourse("A1");
+	classRoster.PrintAll();
+	cout << endl;
+	classRoster.PrintInvalidEmails();
+
+	for (int i = 0; i < 5; ++i) {
+		classRoster.PrintAverageDaysInCourse(classRoster.classRosterArray[i]->GetStudentID());
+	}
+	cout << endl;
+
+	classRoster.PrintByDegreeProgram(SOFTWARE);
+
 	// waits for user input before continuing, use this to halt program for debug
 	system("pause");
 }
