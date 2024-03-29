@@ -25,6 +25,12 @@ int main() {
 	cout << endl;
 
 	classRoster.PrintByDegreeProgram(SOFTWARE);
+	cout << endl;
+
+	classRoster.Remove("A3");
+	classRoster.PrintAll();
+	cout << endl;
+	classRoster.Remove("A3");
 
 	// waits for user input before continuing, use this to halt program for debug
 	system("pause");

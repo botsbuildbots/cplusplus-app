@@ -13,9 +13,7 @@ Roster::Roster() {
  }
 
 Roster::~Roster() {
-  // remember to clean up classRosterArray memory before program completes
-  // this is only necessary if classRosterArray is dynamically allocated, as of right now it is not 
-  // delete[] classRosterArray;
+    // this ideally should be some sort of memory deallocation
 }
 
 void Roster::Parse(string studentData) {
@@ -85,17 +83,31 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
 
 void Roster::Remove(string studentID) { 
     int indexToRemove = 0;
+    // use success flag to filter between an if/else statement for student removal or error message
+    bool foundStudent = false;
     for (int i = 0; i < NUM_STUDENTS; ++i) {
         if (classRosterArray[i]->GetStudentID() == studentID) {
             indexToRemove = i;
+            foundStudent = true;
         }
     }
-    // use indexToRemove to specify which object needs to be removed, then shift remaining elements left by one
+    if (foundStudent == true) {
+        // code to remove student (since students are created with "new" use "delete")
+        delete classRosterArray[indexToRemove];
+        // code to shift array left one
+        for (int j = indexToRemove; j < NUM_STUDENTS - 1; ++j) {
+            classRosterArray[j] = classRosterArray[j + 1];
+        }
+        --printCount;
+    }
+    else {
+        cout << "An entry for Student " << studentID << " was not found." << endl;
+    }
 }
 
 void Roster::PrintAll() { 
   // for-loop through Student instances and print all available
-  for (int i = 0; i < NUM_STUDENTS; ++i) {
+  for (int i = 0; i < printCount; ++i) {
         classRosterArray[i]->Print();
   }
 }

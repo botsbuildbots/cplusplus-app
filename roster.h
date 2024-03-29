@@ -20,6 +20,7 @@ class Roster {
 	  };
     // declares a pointer that will store location of array of student objects
   public:
+    int printCount = NUM_STUDENTS;
     Student* classRosterArray[NUM_STUDENTS];
     int targetIndex = 0;
     Roster();
