@@ -5,7 +5,7 @@
 using namespace std;
 
 class Student {
-  // per assignment requirements member variables should not be adjusted outside of mutators/accessors
+  // per assignment requirements Student class member variables should not be adjusted outside of mutators/accessors
    private:
     string studentID;
     string firstName;
@@ -25,7 +25,7 @@ class Student {
     string GetLastName() const;
     string GetEmail() const;
     int GetAge() const;
-    int* GetDaysInCourse();  // overthought this, the accessor should just return the pointer to location
+    int* GetDaysInCourse();
     DegreeProgram GetDegreeProgram() const;
     // mutators
     void SetStudentID(string ID);
@@ -33,7 +33,7 @@ class Student {
     void SetLastName(string last);
     void SetEmail(string email);
     void SetAge(int age);
-    void SetDaysInCourse(int* days);  // overthought this, the parameter just tells the function where to make the changes
+    void SetDaysInCourse(int* days);
     void SetDegreeProgram(DegreeProgram program);
     void Print();
 };

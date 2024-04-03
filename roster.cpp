@@ -4,22 +4,21 @@
 using namespace std;
 
 Roster::Roster() {
-  // constructor should call Parse() on studentData to populate array during creation
-  // then Parse() will call Add() to add instances to array
-  // this leaves Add() open for independent calls after Roster is populated initially
   for (int i = 0; i < NUM_STUDENTS; ++i) {
         Parse(studentData[i]);
   }
  }
 
+// student instances are created with "new" so they need to be deleted after program completion
 Roster::~Roster() {
-    // this ideally should be some sort of memory deallocation
+    for (int i = 0; i < printCount; ++i) {
+        delete classRosterArray[i];
+    }
 }
 
 void Roster::Parse(string studentData) {
-  // Parse() should work through a single index of studentData[] and call Add() for that line to populate classRosterArray
   // Set ints for left bound and right bound, use find() to target the commas, then use substr() to extract the difference
-  // Store substr() results into temp local variables, then push those to Add()
+  // Store substr() results into temp local variables, then send those over to Add()
     size_t left = 0;
     size_t right = 0;
     right = studentData.find(",");
@@ -48,7 +47,6 @@ void Roster::Parse(string studentData) {
     right = studentData.find(",", left);
     int daysInCourse3 = stoi(studentData.substr(left, right - left));
 
-    // switch statement for degreeProgram, case: "NETWORK" degreeProgram = NETWORK
     left = right + 1;
     right = studentData.find(",", left);
     string programHolder = studentData.substr(left, right - left);
@@ -69,7 +67,6 @@ void Roster::Parse(string studentData) {
 void Roster::Add(string studentID, string firstName, string lastName, string emailAddress, int age,
     int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeProgram) {
     // Student constructor needs the memory address of an int array, so create one here for daysInCourse parameters
-    // numDaysInCourse should be passed to new Student(parameters)
     int *numDaysInCourse = new int[3];
     numDaysInCourse[0] = daysInCourse1;
     numDaysInCourse[1] = daysInCourse2;
@@ -77,13 +74,12 @@ void Roster::Add(string studentID, string firstName, string lastName, string ema
     // Add() creates a single student object at targetIndex, then targetIndex increases by one for the next iteration
     classRosterArray[targetIndex] = new Student(studentID, firstName, lastName, emailAddress, age, numDaysInCourse, degreeProgram);
     ++targetIndex;
-    // since numDaysInCourse is dynamically allocated it needs to be deleted later
     delete[] numDaysInCourse;
 }
 
 void Roster::Remove(string studentID) { 
     int indexToRemove = 0;
-    // use success flag to filter between an if/else statement for student removal or error message
+    // use boolean to filter between an if/else statement for student removal or error message
     bool foundStudent = false;
     for (int i = 0; i < NUM_STUDENTS; ++i) {
         if (classRosterArray[i]->GetStudentID() == studentID) {
@@ -92,21 +88,18 @@ void Roster::Remove(string studentID) {
         }
     }
     if (foundStudent == true) {
-        // code to remove student (since students are created with "new" use "delete")
         delete classRosterArray[indexToRemove];
-        // code to shift array left one
         for (int j = indexToRemove; j < NUM_STUDENTS - 1; ++j) {
             classRosterArray[j] = classRosterArray[j + 1];
         }
         --printCount;
     }
     else {
-        cout << "An entry for Student " << studentID << " was not found." << endl;
+        cout << "An entry for Student \"" << studentID << "\" was not found." << endl;
     }
 }
 
 void Roster::PrintAll() { 
-  // for-loop through Student instances and print all available
   for (int i = 0; i < printCount; ++i) {
         classRosterArray[i]->Print();
   }
@@ -127,23 +120,22 @@ void Roster::PrintAverageDaysInCourse(string studentID) {
 }
 
 void Roster::PrintInvalidEmails() {
-    // loop through classRosterArray, store the emailAddress to temp local variable
-    // run tests on that temp local string, if email address is invalid print message to console
     // valid email addresses must have '@' and '.' characters, must not have ' '
     // find() returns -1 (or npos) if specific character is not found
+    cout << "Checking for valid student email addresses:" << endl;
     string testString;
     for (int i = 0; i < NUM_STUDENTS; ++i) {
         testString = classRosterArray[i]->GetEmail();
         if (testString.find("@") == -1 || testString.find(".") == -1 || testString.find(" ") != -1) {
             cout << "Student " << classRosterArray[i]->GetStudentID() << " does not have a valid email address on file." << endl;
-            cout << testString << " is not a valid email address." << endl << endl;
+            cout << "\"" << testString << "\" is not a valid email address." << endl << endl;
         }
     }
 }
 
 void Roster::PrintByDegreeProgram(DegreeProgram degreeProgram) {
-    // loops through classRosterArray, if degreeProgram value matches parameter call Print() on Student instance
     DegreeProgram compareProgram;
+    cout << "The following students are currently registered in the specified degree program:" << endl;
     for (int i = 0; i < NUM_STUDENTS; ++i) {
         compareProgram = classRosterArray[i]->GetDegreeProgram();
         if (compareProgram == degreeProgram) {
